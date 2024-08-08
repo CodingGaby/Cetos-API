@@ -1,6 +1,6 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const axios = require("axios");
+import express from "express";
+import dotenv from "dotenv";
+import makeRemoteGet from "./functions/makeRequest.js";
 
 dotenv.config();
 
@@ -9,22 +9,6 @@ const port = process.env.PORT || 3000;
 
 // Middleware to parse JSON to JSObject
 app.use(express.json());
-
-// function to make remote GET request
-const makeRemoteGet = async (param) => {
-  if (!param) {
-    try {
-      const response = await axios.get(process.env.MOCK_ENDPOINT);
-      return response.data;
-    } catch (error) {
-      console.error("Error getting BP:", error);
-      throw error;
-    }
-  }
-
-  const res = await axios.get(`${process.env.MOCK_ENDPOINT + param}`);
-  return res.data;
-};
 
 // Test Route
 // GET all BP's 
