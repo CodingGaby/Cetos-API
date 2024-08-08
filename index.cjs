@@ -27,6 +27,7 @@ const makeRemoteGet = async (param) => {
 };
 
 // Test Route
+// GET all BP's 
 app.get("/", async (req, res) => {
   try {
     const result = await makeRemoteGet();
@@ -36,6 +37,7 @@ app.get("/", async (req, res) => {
   }
 });
 
+// GET BP's by id
 app.get("/bp/:id", async (req, res) => {
   try {
     const result = await makeRemoteGet(req.params.id);
@@ -44,6 +46,7 @@ app.get("/bp/:id", async (req, res) => {
     res.status(500).send("Error making remote request");
   }
 });
+
 // Iniciar servidor
 app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}`);
