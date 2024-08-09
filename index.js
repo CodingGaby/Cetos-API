@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import makeRemoteGet from "./functions/makeRequest.js";
+import loginUser from "./functions/login.js";
 
 dotenv.config();
 
@@ -15,6 +16,16 @@ app.use(express.json());
 app.get("/", async (req, res) => {
   try {
     const result = await makeRemoteGet();
+    res.send(result);
+  } catch (error) {
+    res.status(500).send("Error making remote request");
+  }
+});
+
+//Log User
+app.get("/login", async (req, res) => {
+  try {
+    const result = await loginUser();
     res.send(result);
   } catch (error) {
     res.status(500).send("Error making remote request");
