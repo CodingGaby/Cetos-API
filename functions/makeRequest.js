@@ -11,7 +11,7 @@ const makeRemoteGet = async (param) => {
     }
   }
 
-  const res = await axios.get(`${process.env.MOCK_ENDPOINT + param}`);
+  const res = await axios.get(`${process.env.REMOTE_SERVER_ENDPOINT}BusinessPartners('${param}')`);
   return res.data;
 };
 
