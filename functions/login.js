@@ -6,7 +6,7 @@ const agent = new https.Agent({
 });
 
 const loginUser = async () => {
-  axios.post(`${process.env.REMOTE_SERVER_ENDPOINT}/Login`, {
+  axios.post(`${process.env.REMOTE_SERVER_ENDPOINT}Login`, {
     "CompanyDB": "SBODemoUS",
     "Password": "pristine",
     "UserName": "manager"
