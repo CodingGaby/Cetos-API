@@ -5,7 +5,7 @@ const formatBPData = (data) => {
       ForeignName:  data.ForeignName,
       Group: data.Group,
       Currency: data.Currency,
-      FederalTaxID: data.FederalTaxID
+      FederalTaxID: data.FederalTaxID,
       Contact: {
         Tel1: data.Tel1,
         Tel2: data.Tel2,

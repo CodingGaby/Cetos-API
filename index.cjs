@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import makeRemoteGet from "./functions/makeRequest.js";
 import formatBPData from "./formatBPdata.js";
+import { validateAndFormatBP } from "./bpValidation.js"; // Importar el esquema de validación
 
 dotenv.config();
 
@@ -16,7 +17,17 @@ app.use(express.json());
 app.get("/", async (req, res) => {
   try {
     const result = await makeRemoteGet();
-    result = result.map(formatBPData);//format application
+
+    // Aplicar validación y formateo
+    result = result.map(data => {
+      try {
+        return validateAndFormatBP(data);
+      } catch (error) {
+        console.error("Invalid data found:", error.message);
+        return null; // O manejar el error según convenga
+      }
+    }).filter(data => data !== null); // Filtrar cualquier valor nulo
+
     res.send(result);
   } catch (error) {
     res.status(500).send("Error making remote request");
@@ -27,7 +38,9 @@ app.get("/", async (req, res) => {
 app.get("/bp/:id", async (req, res) => {
   try {
     const result = await makeRemoteGet(req.params.id);
-    result = formatBPData(result);//format application
+
+    result = validateAndFormatBP(result);
+
     res.send(result);
   } catch (error) {
     res.status(500).send("Error making remote request");
