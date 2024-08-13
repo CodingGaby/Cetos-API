@@ -11,8 +11,13 @@ const makeRemoteGet = async (param) => {
     }
   }
 
-  const res = await axios.get(`${process.env.REMOTE_SERVER_ENDPOINT}BusinessPartners('${param}')`);
-  return res.data;
+  try {
+    const res = await axios.get(`${process.env.REMOTE_SERVER_ENDPOINT}BusinessPartners('${param}')`);
+    return res.data;
+  } catch (error) {
+    console.error("Error getting BPPP:", error);
+    throw error;
+  }
 };
 
 export default makeRemoteGet;
