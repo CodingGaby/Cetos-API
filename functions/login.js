@@ -6,9 +6,9 @@ const agent = new https.Agent({
 });
 
 const loginData = {
-  "CompanyDB": "SBODemoUS",
-  "Password": "innormax",
-  "UserName": "manager"
+  "CompanyDB": process.env.COMP_DB,
+  "Password": process.env.DB_PASS,
+  "UserName": process.env.DB_USERNAME
 };
 
 const loginUser = async () => {
