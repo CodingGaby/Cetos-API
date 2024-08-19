@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import makeRemoteGet from "./functions/makeRequest.js";
+import { getBussinessPartnerByID, getMockBPS } from "./functions/makeRequest.js";
 import loginUser from "./functions/login.js";
 
 dotenv.config();
@@ -12,10 +12,10 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 // Test Route
-// GET all BP's 
+// GET all MOCK BP's 
 app.get("/", async (req, res) => {
   try {
-    const result = await makeRemoteGet();
+    const result = await getMockBPS();
     res.send(result);
   } catch (error) {
     res.status(500).send("Error making remote request");
@@ -32,10 +32,10 @@ app.get("/login", async (req, res) => {
   }
 });
 
-// GET BP's by id
+// GET BP's by id in remote server
 app.get("/bp/:id", async (req, res) => {
   try {
-    const result = await makeRemoteGet(req.params.id);
+    const result = await getBussinessPartnerByID(req.params.id);
     res.send(result);
   } catch (error) {
     res.status(500).send("Error making remote request");
