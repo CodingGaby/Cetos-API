@@ -28,3 +28,13 @@ export const getBussinessPartnerByID = async (bussinessPartnerID) => {
     throw error;
   }
 }
+
+export const getPurchaseOrderByID = async (purchaseOrderID) => {
+  try {
+    const res = await axios.get(`${process.env.REMOTE_SERVER_ENDPOINT}PurchaseOrder('${purchaseOrderID}')`, { httpsAgent });
+    return res.data;
+  } catch (error) {
+    console.error(`Error getting Purchase Order (${purchaseOrderID}):`, error);
+    throw error;
+  }
+}
