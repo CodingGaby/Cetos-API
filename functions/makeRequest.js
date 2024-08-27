@@ -8,7 +8,7 @@ const httpsAgent = new https.Agent({
 export const getMockBPS = async (param) => {
   if (!param) {
     try {
-      const response = await axios.get(process.env.MOCK_ENDPOINT, { httpsAgent });
+      const response = await axios.get(process.env.MOCK_ENDPOINT + "bp", { httpsAgent });
       return response.data;
     } catch (error) {
       console.error("Error getting BP:", error);
@@ -29,12 +29,24 @@ export const getBussinessPartnerByID = async (bussinessPartnerID) => {
   }
 }
 
-export const getPurchaseOrderByID = async (purchaseOrderID) => {
+export const getSaleOrderByID = async (saleOrderID) => {
   try {
-    const res = await axios.get(`${process.env.REMOTE_SERVER_ENDPOINT}PurchaseOrder('${purchaseOrderID}')`, { httpsAgent });
+    const res = await axios.get(`${process.env.REMOTE_SERVER_ENDPOINT}SaleOrder('${purchaseOrderID}')`, { httpsAgent });
     return res.data;
   } catch (error) {
-    console.error(`Error getting Purchase Order (${purchaseOrderID}):`, error);
+    console.error(`Error getting Sale Order (${saleOrderID}):`, error);
     throw error;
   }
 }
+
+export const getMockSO = async () => {
+  try {
+    const response = await axios.get(`${process.env.MOCK_ENDPOINT}so/`, { httpsAgent });
+    return response.data;
+  } catch (error) {
+    console.error("Error getting Mock SO:", error);
+    throw error;
+  }
+
+};
+
