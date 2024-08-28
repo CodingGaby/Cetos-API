@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import { getBussinessPartnerByID, getMockBPS, getMockSO } from "./functions/makeRequest.js";
+import { getBussinessPartnerByID, getMockBPS, getMockSO, getSaleOrderByID } from "./functions/makeRequest.js";
 import loginUser from "./functions/login.js";
 
 dotenv.config();
@@ -46,6 +46,16 @@ app.get("/bp/:id", async (req, res) => {
 app.get("/sales", async (req, res) => {
   try {
     const result = await getMockSO();
+    res.send(result);
+  } catch (error) {
+    res.status(500).send("Error making remote request");
+  }
+});
+
+//GET SO's by ID en remote server
+app.get("/sales/:id", async (req, res) =>{
+  try{
+    const result = await getSaleOrderByID(req.params.id);
     res.send(result);
   } catch (error) {
     res.status(500).send("Error making remote request");
