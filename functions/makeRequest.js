@@ -31,7 +31,7 @@ export const getBussinessPartnerByID = async (bussinessPartnerID) => {
 
 export const getSaleOrderByID = async (saleOrderID) => {
   try {
-    const res = await axios.get(`${process.env.REMOTE_SERVER_ENDPOINT}SaleOrder('${purchaseOrderID}')`, { httpsAgent });
+    const res = await axios.get(`${process.env.REMOTE_SERVER_ENDPOINT}SaleOrder('${saleOrderID}')`, { httpsAgent });
     return res.data;
   } catch (error) {
     console.error(`Error getting Sale Order (${saleOrderID}):`, error);
